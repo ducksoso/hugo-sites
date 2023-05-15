@@ -2,13 +2,13 @@
 title: "Mysql中INT、CHAR、VARCHAR数据类型中M的含义"
 date: 2023-05-15T15:01:39+08:00
 draft: false
-tags: ['mysql','varchar', 'int']
-categories: ['mysql']
+tags: ['Mysql','varchar', 'int']
+categories: ['Mysql']
 ---
 
 
 
-使用mysql数据库的过程中，对于 int(M)、tinyint(M)、char(M)、varchar(M) ，这里的M到底代表什么？
+使用Mysql数据库的过程中，对于 int(M)、tinyint(M)、char(M)、varchar(M) ，这里的M到底代表什么？
 
 
 
@@ -44,11 +44,40 @@ CREATE TABLE `<table_name>` (
 
 `int(2) ZEROFILL`这样才能发挥**显示宽度**的功能
 
+#### 注意：
+
+* 显示宽度**只适应用于Mysql
+
+* 显示宽度**和数值类型的取值范围是无关的。
+   例如int(10) 他的取值范围任然是(-2 147 483 648，2 147 483 647)
+
+* 显示宽度**只是指明MYSQL数值类型最少显示的数字个数。
+   当数值的位数小于**显示宽度**时会有空格或零填充，当数值的位数大于**显示宽度**时，直接显示该数值
+
+* 显示宽度**的效果(插零)需要配合zerofill使用
+
+
+
 ### 字符类型
 
 varchar(M)，这里M表示最大字符长度，超过这个长度会抛错，在不超过M的前提下，可以动态占用空间
 
 char(M)，这里的M表示固定宽度的字符，也不能超过！申请的时候，是固定下来的！
+
+
+
+Mysql字符串类型用来存储字符串数据，还可以存储图片和声音的二进制数据。
+
+Mysql中的字符串类型有：`CHAR`、`VARCHAR`、`TINYTEXT`、`TEXT`、`MEDIUMTEXT`、`LONGTEXT`、`ENUM`、`SET`等
+
+| 数据类型   | 说明                   | 存储                             |
+| ---------- | ---------------------- | -------------------------------- |
+| CHAR(M)    | 固定长度非二进制字符串 | M字节，1<= M <= 255              |
+| VARCHAR(M) | 变长非二进制字符串     | L+1字节，L <= M && 1 <= M <= 255 |
+| TINYTEXT   | 非常小的非二进制字符串 | L+1字节，L < 2^8                 |
+| TEXT       | 小的非二进制字符串     | L+1字节，L < 2^16                |
+
+
 
 
 
